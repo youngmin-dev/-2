@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static MainMenu mm;
+    public GameObject gameLabel;
+
+    public enum GameState
     {
-        
+        Ready,
+        Start,
+        Quit
+    }
+    // Start is called before the first frame update
+    private void Awake()
+    {
+        if (mm = null)
+        {
+            mm = this;
+        }
     }
 
     // Update is called once per frame
@@ -18,14 +30,45 @@ public class MainMenu : MonoBehaviour
     public void OnClickStartGame()
     {
         Debug.Log("Start");
+        StartCoroutine(ReadyToStart());
     }
 
     public void OnClickQuit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
+        //UnityEngine에서 사용
         Application.Quit();
-#endif
+
+        
+//#if UNITY_EDITOR
+        //UnityEditor.EditorApplication.isPlaying = false;
+//#else
+       // Application.Quit();
+//#endif
     }
+
+    
+    
+    
+    public GameState gState;
+    // Start is called before the first frame update
+    void Start()
+    {
+        gState = GameState.Ready;
+
+
+    }
+
+    // Update is called once per frame
+   
+
+
+    IEnumerator ReadyToStart()
+    {
+        gameLabel.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+        gState = GameState.Start;
+    }
+
 }
+
