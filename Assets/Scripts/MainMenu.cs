@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void OnClickStartGame()
     {
@@ -35,20 +35,20 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickQuit()
     {
-        //UnityEngine에서 사용
-        Application.Quit();
 
-        
-//#if UNITY_EDITOR
-        //UnityEditor.EditorApplication.isPlaying = false;
-//#else
-       // Application.Quit();
-//#endif
+        //Application.Quit();
+
+        //UnityEngine에서 사용
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+         Application.Quit();
+        #endif
     }
 
-    
-    
-    
+
+
+
     public GameState gState;
     // Start is called before the first frame update
     void Start()
@@ -59,7 +59,7 @@ public class MainMenu : MonoBehaviour
     }
 
     // Update is called once per frame
-   
+
 
 
     IEnumerator ReadyToStart()
@@ -71,4 +71,3 @@ public class MainMenu : MonoBehaviour
     }
 
 }
-
